@@ -1,4 +1,5 @@
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsUserAlreadyExist } from './isUserExists.validator';
 
 export class User {
   id: string;
@@ -9,6 +10,7 @@ export class User {
   @IsString({
     message: 'login is nees to be a string',
   })
+  @IsUserAlreadyExist({})
   login: string;
 
   @IsEmail({})

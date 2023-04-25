@@ -48,7 +48,7 @@ export class UsersController {
   public validateUser(@Param('login') login: string): object {
     console.log(login);
     return {
-      message: 'usuário válido!',
+      message: 'Usuário válido!',
     };
   }
 }
