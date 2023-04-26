@@ -27,8 +27,7 @@ export class User {
 
   @IsNotEmpty({ message: 'fullname is requires' })
   @Expose({
-    name: 'nomeCompleto',
-    toPlainOnly: true,
+    name: 'full_name',
   })
   fullName: string;
 
