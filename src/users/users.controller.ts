@@ -12,6 +12,8 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
+import { NestResponseBuilder } from 'src/core/http/nest.response.builder';
+import { NestResponse } from 'src/core/http/nest.response';
 
 @Controller('users')
 export class UsersController {
@@ -46,10 +48,18 @@ export class UsersController {
 
   @Post()
   //Body está sendo atribuído a variável user
-  public create(@Body() user: User): User {
+  public create(@Body() user: User): NestResponse {
     //o Body vai receber o User e o retorno vai ser um USer
     const userCreated = this.userService.create(user);
-    return userCreated;
+
+    //HEADER CUSTOMIZADO USANDO RECURSO DO NEST
+    return new NestResponseBuilder()
+      .withStatus(HttpStatus.CREATED)
+      .withHeaders({
+        Location: `/users/${userCreated.login}`,
+      })
+      .withBody(userCreated)
+      .build();
   }
 
   @Post(':login')
