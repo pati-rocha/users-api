@@ -42,6 +42,7 @@ export function IsUserAlreadyExist(validationOptions?: ValidationOptions) {
 }
 
 /* 
+CUSTOM VALIDATOR
 Decorator - uma função que retornar outra função. 
 
 o decorator do class validation (function IsUserAlreadyExist) recebe as opções de validações (validationOptions) e a função que (function IsUserAlreadyExist) retorna recebe o objeto atual (object: User) e o nome da propriedade (propertyName).
