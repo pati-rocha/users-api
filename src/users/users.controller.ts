@@ -4,6 +4,8 @@ import {
   Get,
   Header,
   HttpCode,
+  HttpStatus,
+  NotFoundException,
   Param,
   Post,
   Query,
@@ -20,8 +22,16 @@ export class UsersController {
   @Get(':login')
   public getUsersByLogin(@Param('login') login: string): User {
     const user = this.userService.searchByLogin(login);
+
+    if (!user) {
+      throw new NotFoundException({
+        statusCode: HttpStatus.NOT_FOUND,
+        message: 'User not found!',
+      });
+    }
     return user;
   }
+
   // users?page=0&size=10 -> query params
   @Get()
   public getAll(
